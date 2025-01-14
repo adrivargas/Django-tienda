@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} Crear Producto {% endblock %}
+{% block content %}
+    <h1>Crear Producto</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.nombre_producto.id_for_label }}" class="form-label">Nombre del Producto</label>
+                        {{ form.nombre_producto }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.stock_producto.id_for_label }}" class="form-label">Stock</label>
+                        {{ form.stock_producto }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.precio_producto.id_for_label }}" class="form-label">Precio</label>
+                        {{ form.precio_producto }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.id_categoria_producto.id_for_label }}" class="form-label">Categoría</label>
+                        {{ form.id_categoria_producto }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Crear Producto" class="btn btn-success">
+                <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
