@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Lista de productos {% endblock %}
+{% block content %}
+        <h1>
+            Listar Productos
+        </h1>
+        <table>
+            <tr>
+                <!-- <th>Imagen</th> -->
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>tock</th>
+                <th></th>
+            </tr>
+            {% for producto in prod %}
+            <tr>
+                <!-- <td>
+                    {% if producto.foto_producto %}
+                        <img src="{{ producto.foto_producto.url }}" alt="{{ producto.nombre_producto }}" width="100">
+                    {% else %}
+                        <span>No hay imagen</span>
+                    {% endif %}
+                </td> -->
+                <td>{{ producto.nombre_producto }}</td>
+                <td>{{ producto.tipo_producto }}</td>
+                <td>{{ producto.precio_producto }}</td>
+                <td>{{ producto.stock_producto }}</td>
+                <td> <a href="{% url 'editar_producto' producto.id_producto %}">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+{% endblock %}
