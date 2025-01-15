@@ -123,10 +123,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Directorio compartido para archivos estáticos
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Para producción
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Para producción
 
-MEDIA_URL = '/productos/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'productos')
+# MEDIA_URL = 'productos'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'productos')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

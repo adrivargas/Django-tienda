@@ -51,6 +51,7 @@ table th {
 
 /*CSS PARA CREAR_PRODUCTO*/
 /* Asegurando que los inputs tengan un buen estilo */
+
 form input[type="text"], form input[type="number"], form select {
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -70,7 +71,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: #218838; /* Verde más oscuro al pasar el mouse */
+    background-color: #218838; /*  al pasar el mouse */
 }
 
 /* Espaciado entre los campos del formulario */
@@ -105,6 +106,10 @@ h1 {
     background-color: #c82333; /* Rojo más oscuro */
 }
 
+/*Home image*/
+.img-home{
+    display: flex;
+}
 /*footer*/
 footer {
     background-color: #f8f9fa;
