@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} Sistema de Ventas {% endblock %}
-{% block content %}
-    <h1>
-     Bienvenido a mi tienda 
-    </h1>
-    {% load static %}
-    {% comment %} <img class="img-home" src="static/productos/home.png" style="display: flex; width: 40%;"> {% endcomment %}
-    <img class="img-home" src="static/productos/home.png" style="width: 40%; display:flex; margin:auto;">
 
+{% block title %} Sistema de Ventas {% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="text-center p-4 shadow-lg rounded bg-white">
+        <h1 class="display-4 text-primary fw-bold">Bienvenido a mi Tienda</h1>
+        <p class="lead text-secondary">Descubre los mejores productos a precios increíbles</p>
+        
+        {% load static %}
+        <img class="img-fluid d-block mx-auto mt-3 rounded shadow" src="{% static 'productos/home.png' %}" style="max-width: 50%;">
+    </div>
+</div>
 {% endblock %}

@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 {% block title %} Editar Producto {% endblock %}
 {% block content %}
-    <h1>Editar Producto: {{producto.nombre}}</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Editar Producto">
-        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+            <h1 class="text-center mb-4">Editar Producto: {{producto.nombre}}</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="mb-3">
+                    <input type="submit" value="Editar Producto">
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

@@ -116,3 +116,51 @@ footer {
     padding: 1rem;
     font-size: 0.9rem;
 }
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 200px; /* Ajusta la altura de la imagen */
+    object-fit: cover;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: none;
+}
+/* Estilos del formulario */
+form input[type="submit"], form .btn-secondary {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Mejora del estilo del formulario */
+form input[type="text"], form input[type="number"], form select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Para dispositivos móviles */
+@media (max-width: 576px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .btn-secondary, .btn-success {
+        width: 100%;
+    }
+}

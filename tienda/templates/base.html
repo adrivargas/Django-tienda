@@ -6,40 +6,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Mi Tienda {% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{% static 'tienda/css/styles.css' %}">
-
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Mi Tienda</a>
+    <!-- Navbar mejorada -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+                <i class="bi bi-shop"></i> Mi Tienda
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'lista_productos' %}">Productos</a>
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">
+                            <i class="bi bi-house-door"></i> Inicio
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'crear_producto' %}">Crear Producto</a>
+                        <a class="nav-link {% if request.path == '/productos/' %}active{% endif %}" href="{% url 'lista_productos' %}">
+                            <i class="bi bi-box-seam"></i> Productos
+                        </a>
                     </li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/crear_producto/' %}active{% endif %}" href="{% url 'crear_producto' %}">
+                                <i class="bi bi-plus-circle"></i> Crear Producto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="{% url 'salir' %}">
+                                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/iniciar/' %}active{% endif %}" href="{% url 'iniciar' %}">
+                                <i class="bi bi-person"></i> Iniciar Sesión
+                            </a>
+                        </li>                
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/registrar/' %}active{% endif %}" href="{% url 'registrar' %}">
+                                <i class="bi bi-person-plus"></i> Registrarse
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <!-- Contenedor Principal -->
+    <div class="container mt-5">
         {% block content %}
         {% endblock %}
     </div>
 
-    <footer class="text-center mt-4">
-        <p>&copy; 2025 Mi Tienda. Todos los derechos reservados.</p>
+    <!-- Footer mejorado -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2025 Mi Tienda | <i class="bi bi-heart-fill text-danger"></i> Desarrollado con pasión</p>
     </footer>
 
-    <!-- Scripts de jQuery y Bootstrap -->
+    <!-- Scripts de Bootstrap y jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

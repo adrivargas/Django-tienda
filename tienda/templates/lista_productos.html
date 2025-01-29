@@ -1,35 +1,33 @@
 {% extends 'base.html' %}
 {% block title %} Lista de productos {% endblock %}
 {% block content %}
-        <h1>
-            Listar Productos
-        </h1>
-        <table>
-            <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Precio</th>
-                <th>tock</th>
-                <th></th>
-            </tr>
-            {% for producto in prod %}
-            <tr>
-                <td>
-                    {% load static %}
-                    {% if producto.foto_producto %}
-                        <img src="{% static  producto.foto_producto  %}" alt="{{ producto.nombre_producto }}" width="100">
-                    {% else %}
-                        <span>No hay imagen</span>
-                    {% endif %}
-                </td>
-
-                <td>{{ producto.nombre_producto }}</td>
-                <td>{{ producto.tipo_producto }}</td>
-                <td>{{ producto.precio_producto }}</td>
-                <td>{{ producto.stock_producto }}</td>
-                <td> <a href="{% url 'editar_producto' producto.id_producto %}">Editar</a></td>
-            </tr>
-            {% endfor %}
-        </table>
+    <h1>Listar Productos</h1>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for producto in prod %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                {% load static %}
+                {% if producto.foto_producto %}
+                    <img src="{% static producto.foto_producto %}" class="card-img-top" alt="{{ producto.nombre_producto }}">
+                {% else %}
+                    <img src="{% static 'path_to_default_image.jpg' %}" class="card-img-top" alt="Sin imagen">
+                {% endif %}
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                    <p class="card-text"><strong>Tipo:</strong> {{ producto.tipo_producto }}</p>
+                    <p class="card-text"><strong>Precio:</strong> ${{ producto.precio_producto }}</p>
+                    <p class="card-text"><strong>Stock:</strong> {{ producto.stock_producto }}</p>
+                </div>
+                
+                {% if user.is_authenticated %}
+                <div class="card-footer text-center">
+                    <a href="{% url 'editar_producto' producto.id_producto %}" class="btn btn-primary">Editar</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Iniciar Sesión {% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Nombre de usuario</label>
+                <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu usuario" required/>
+            </div>
+            
+            <div class="mb-3">
+                <label for="clave" class="form-label">Contraseña</label>
+                <input type="password" name="clave" class="form-control" placeholder="Ingresa tu contraseña" required/>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

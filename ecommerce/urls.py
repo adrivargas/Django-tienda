@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from tienda.views import hola_mundo, lista_producto, crear_producto, home, editar_producto
+from tienda.views import *
 
 urlpatterns = [
     path('', home, name='home'),
@@ -25,5 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', lista_producto, name='lista_productos'),
     path('productos/crear', crear_producto, name='crear_producto'),
-    path('productos/editar/<int:id_prod>', editar_producto, name='editar_producto')
+    path('productos/editar/<int:id_prod>', editar_producto, name='editar_producto'),
+    path('registrar/', registrar, name='registrar'),
+    path('iniciar/', iniciar, name='iniciar'),
+    path('salir/',cerrar_sesion, name='salir')
 ]
