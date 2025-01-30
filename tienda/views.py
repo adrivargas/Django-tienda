@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Producto, Carrito
+from .models import Producto, Carrito, Pedido, Detallepedidos,Usuario
 from .forms import ProductoForm,CustomUserCreationForm
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
+from django.utils import timezone
+from decimal import Decimal
 
 # Create your views here.
 def hola_mundo(request):
@@ -168,14 +170,26 @@ def finalizar_compra(request):
         carrito_items = Carrito.objects.filter(usuario=request.user)
         total = sum(item.subtotal for item in carrito_items)
 
-        # Aquí puedes agregar lógica para crear un pedido y vaciar el carrito
-        # Ejemplo:
-        # Pedido.objects.create(usuario=request.user, total=total, ...)
-        carrito_items.delete()  # Eliminar los items del carrito
+        iva = total * Decimal('0.12')  # Aseguramos que el 0.12 sea un decimal
 
-        return render(request, 'compra_finalizada.html', {'total': total})
+        # Obtener la instancia de Usuario correspondiente al user de Django
+        usuario = Usuario.objects.get(user=request.user)
+
+        # Crear el pedido, asegurándote de usar la instancia de Usuario
+        pedido = Pedido.objects.create(
+            id_usuario=usuario,
+            total_pedido=total,
+            iva_pedido=iva,
+            estado_pedido='pedido'  # Asegúrate de establecer el estado adecuado
+        )
+
+        # Eliminar los items del carrito
+        carrito_items.delete()
+
+        return render(request, 'compra_finalizada.html', {'total': total, 'iva': iva})
     else:
         return redirect('iniciar')
+
     
 @login_required
 def eliminar_del_carrito(request, id_prod):
@@ -227,3 +241,14 @@ def eliminar_una_unidad(request, id_prod):
             item_carrito.delete()  # Eliminar si la cantidad llega a 0
 
     return redirect('carrito')  # Redirigir a la vista del carrito
+@login_required
+def pedidos(request):
+    # Verifica si el usuario es un administrador
+    if request.user.is_staff:
+        # Obtener todos los pedidos
+        pedidos = Pedido.objects.all()
+
+        return render(request, 'pedidos.html', {'pedidos': pedidos})
+
+    else:
+        return redirect('home')  # Redirigir a la página de inicio si no es admin

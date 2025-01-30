@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Pedidos - Administración{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Pedidos Realizados</h1>
+
+{% if pedidos %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID del Pedido</th>
+                <th>Fecha</th>
+                <th>Forma de Entrega</th>
+                <th>Total</th>
+                <th>IVA</th>
+                <th>Forma de Pago</th>
+                <th>Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.id_pedido }}</td>  <!-- Cambié pedido.id a pedido.id_pedido -->
+                    <td>{{ pedido.fecha_pedido }}</td>
+                    <td>{{ pedido.get_formapago_pedido_display }}</td>
+                    <td>${{ pedido.total_pedido }}</td>
+                    <td>${{ pedido.iva_pedido }}</td>
+                    <td>{{ pedido.formapago_pedido }}</td>
+                    <td>{{ pedido.id_usuario.nombre_usuario }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay pedidos registrados.</p>
+{% endif %}
+{% endblock %}

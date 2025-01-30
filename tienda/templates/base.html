@@ -40,17 +40,24 @@
                         </a>
                     </li>
                     
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated%}
                         <li class="nav-item">
-                          <a class="nav-link {% if request.resolver_match.view_name == 'carrito' %}active{% endif %}" href="{% url 'carrito' %}">
-                             <i class="bi bi-cart"></i> 
-                             Carrito ({{ carrito_count }}) <!-- Mostrar el número de productos en el carrito -->
-                          </a>
+                            {% if not user.is_staff %} <!-- Verifica que el usuario NO sea administrador -->
+                              <a class="nav-link {% if request.resolver_match.view_name == 'carrito' %}active{% endif %}" href="{% url 'carrito' %}">
+                                 <i class="bi bi-cart"></i> 
+                                 Carrito ({{ carrito_count }}) <!-- Mostrar el número de productos en el carrito -->
+                               </a>
+                            {% endif %}
                         </li>
                         {% if user.username == "adrivargas" %}
                             <li class="nav-item">
                                 <a class="nav-link {% if request.resolver_match.view_name == 'crear_producto' %}active{% endif %}" href="{% url 'crear_producto' %}">
                                     <i class="bi bi-plus-circle"></i> Crear Producto
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.view_name == 'pedidos' %}active{% endif %}" href="{% url 'pedidos' %}">
+                                    <i class="bi bi-box"></i> Pedidos
                                 </a>
                             </li>
                         {% endif %}

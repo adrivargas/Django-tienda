@@ -68,11 +68,13 @@ class Pedido(models.Model):
 class Detallepedidos(models.Model):
     id_detalle_pedido = models.AutoField(primary_key=True)
     id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    id_pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, null=True)  # Permitir null temporalmente
     cantidad = models.IntegerField()
     valor = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.id_detalle_pedido
+        return f"Detalle {self.id_detalle_pedido} - Pedido {self.id_pedido.id_pedido if self.id_pedido else 'Sin Pedido'}"
+
 
 
 class Carrito(models.Model):
