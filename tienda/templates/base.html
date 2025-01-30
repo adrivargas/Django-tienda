@@ -30,22 +30,30 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">
+                        <a class="nav-link {% if request.resolver_match.view_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
                             <i class="bi bi-house-door"></i> Inicio
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/productos/' %}active{% endif %}" href="{% url 'lista_productos' %}">
+                        <a class="nav-link {% if request.resolver_match.view_name == 'lista_productos' %}active{% endif %}" href="{% url 'lista_productos' %}">
                             <i class="bi bi-box-seam"></i> Productos
                         </a>
                     </li>
                     
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/crear_producto/' %}active{% endif %}" href="{% url 'crear_producto' %}">
-                                <i class="bi bi-plus-circle"></i> Crear Producto
-                            </a>
+                          <a class="nav-link {% if request.resolver_match.view_name == 'carrito' %}active{% endif %}" href="{% url 'carrito' %}">
+                             <i class="bi bi-cart"></i> 
+                             Carrito ({{ carrito_count }}) <!-- Mostrar el número de productos en el carrito -->
+                          </a>
                         </li>
+                        {% if user.username == "adrivargas" %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.view_name == 'crear_producto' %}active{% endif %}" href="{% url 'crear_producto' %}">
+                                    <i class="bi bi-plus-circle"></i> Crear Producto
+                                </a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link text-danger" href="{% url 'salir' %}">
                                 <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
@@ -53,12 +61,12 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/iniciar/' %}active{% endif %}" href="{% url 'iniciar' %}">
+                            <a class="nav-link {% if request.resolver_match.view_name == 'iniciar' %}active{% endif %}" href="{% url 'iniciar' %}">
                                 <i class="bi bi-person"></i> Iniciar Sesión
                             </a>
                         </li>                
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/registrar/' %}active{% endif %}" href="{% url 'registrar' %}">
+                            <a class="nav-link {% if request.resolver_match.view_name == 'registrar' %}active{% endif %}" href="{% url 'registrar' %}">
                                 <i class="bi bi-person-plus"></i> Registrarse
                             </a>
                         </li>

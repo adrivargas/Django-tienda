@@ -164,3 +164,22 @@ form input[type="text"], form input[type="number"], form select {
         width: 100%;
     }
 }
+
+/* Estilos específicos solo para la tabla del carrito */
+.carrito-table tbody tr {
+    background-color: rgb(244, 243, 243);
+    color: rgb(17, 17, 17); /* Color de texto blanco para mejor visibilidad */
+}
+
+.carrito-table th {
+    background-color:#0d6efd;
+    font-weight: bold;
+}
+
+.carrito-table td {
+    vertical-align: middle;
+}
+
+.carrito-table tbody tr:hover {
+    background-color: #9fa0cb; /* Color ligeramente más claro para el hover */
+}

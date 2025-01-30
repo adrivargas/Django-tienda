@@ -28,5 +28,10 @@ urlpatterns = [
     path('productos/editar/<int:id_prod>', editar_producto, name='editar_producto'),
     path('registrar/', registrar, name='registrar'),
     path('iniciar/', iniciar, name='iniciar'),
-    path('salir/',cerrar_sesion, name='salir')
+    path('salir/',cerrar_sesion, name='salir'),
+    path('agregar_al_carrito/<int:id_prod>/',agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/', carrito, name='carrito'),
+    path('carrito/eliminar/<int:id_prod>/', eliminar_del_carrito, name='eliminar_del_carrito'),
+     path('eliminar-una-unidad/<int:id_prod>/',eliminar_una_unidad, name='eliminar_una_unidad'),
+    path('actualizar_cantidad_carrito/<int:id_prod>/<int:nueva_cantidad>/', actualizar_cantidad_carrito, name='actualizar_cantidad_carrito'),
 ]

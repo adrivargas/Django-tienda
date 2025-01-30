@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Carrito de Compras {% endblock %}
+
+{% block content %}
+<h1 class="text-center my-4">Carrito de Compras</h1>
+
+{% if carrito_items %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover carrito-table">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Eliminar Producto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrito_items %}
+                    <tr>
+                        <td>{{ item.producto.nombre_producto }}</td>
+                        <td>${{ item.producto.precio_producto }}</td> <!-- Precio unitario -->
+                        <td>{{ item.cantidad }}
+                            <div class="text-center" style="margin-top: -25px;">
+                                <a href="{% url 'agregar_al_carrito' id_prod=item.producto.id_producto %}" class="btn btn-success btn-sm" title="Agregar una unidad">
+                                  <i class="bi bi-bag-plus-fill"></i> 
+                                </a>
+                                <!-- Botón para eliminar una unidad -->
+                                <a href="{% url 'eliminar_una_unidad' id_prod=item.producto.id_producto %}" class="btn btn-danger btn-sm" title="Eliminar una unidad">
+                                  <i class="bi bi-dash-circle"></i> 
+                                </a>
+                            </div>
+                        </td>
+                        <td>${{ item.subtotal }}</td> <!-- Subtotal por producto -->
+                        <td class="text-center">
+                            <!-- Botón para eliminar el producto completamente -->
+                            <a href="{% url 'eliminar_del_carrito' id_prod=item.producto.id_producto %}" class="btn btn-danger btn-sm" title="Eliminar producto">
+                                <i class="bi bi-trash"></i> 
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between my-3">
+        <h3>Total de la compra: ${{ total }}</h3>
+        <a href="{% url 'lista_productos' %}" class="btn btn-primary">Finalizar Compra</a>
+    </div>
+
+{% else %}
+    <p class="text-center">No tienes productos en tu carrito.</p>
+{% endif %}
+{% endblock %}

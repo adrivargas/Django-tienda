@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nombre_usuario = models.CharField(max_length=100)
-    apelllido_usuario = models.CharField(max_length=100)
+    apellido_usuario = models.CharField(max_length=100)
     fecha_nacimiento_usuario = models.DateField(null=True, blank=True)
     genero_usuario = models.CharField(max_length=20,null=True)
     fecharegistro_usuario = models.DateTimeField(null=True)
@@ -73,3 +75,14 @@ class Detallepedidos(models.Model):
         return self.id_detalle_pedido
 
 
+class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.producto.nombre_producto}'
+    
+    @property
+    def subtotal(self):
+        return self.producto.precio_producto * self.cantidad

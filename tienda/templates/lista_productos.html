@@ -22,9 +22,17 @@
                 </div>
                 
                 {% if user.is_authenticated %}
-                <div class="card-footer text-center">
-                    <a href="{% url 'editar_producto' producto.id_producto %}" class="btn btn-primary">Editar</a>
-                </div>
+                  {% if user.username == "adrivargas" %}
+                     <div class="card-footer text-center">
+                      <a href="{% url 'editar_producto' producto.id_producto %}" class="btn btn-primary">Editar</a>
+                     </div>
+                  {% else %}
+                     <div class="card-footer text-center">
+                        <a href="{% url 'agregar_al_carrito' id_prod=producto.id_producto %}" class="btn btn-success">
+                         <i class="bi bi-cart"></i>
+                        </a>
+                     </div>
+                  {% endif %}
                 {% endif %}
             </div>
         </div>
