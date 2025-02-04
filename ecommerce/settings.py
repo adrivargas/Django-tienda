@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Directorio compartido para archivos estáticos
+    os.path.join(BASE_DIR, 'tienda','static'),  # Directorio compartido para archivos estáticos
 ]
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Para producción

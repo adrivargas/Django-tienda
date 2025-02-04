@@ -22,7 +22,7 @@
                 </div>
                 
                 {% if user.is_authenticated %}
-                  {% if user.username == "adrivargas" %}
+                   {% if user.is_superuser %}
                      <div class="card-footer text-center">
                       <a href="{% url 'editar_producto' producto.id_producto %}" class="btn btn-primary">Editar</a>
                      </div>

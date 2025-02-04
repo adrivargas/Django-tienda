@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Finalizar Compra</h2>
+
+    <form method="post" action="{% url 'finalizar_compra' %}" id="compraForm">
+        {% csrf_token %}
+        
+        <h3>Carrito de compras:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrito_items %}
+                <tr>
+                    <td>{{ item.producto.nombre_producto }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ item.producto.precio_producto }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h4>Total: ${{ total }}</h4>
+        <h4>IVA (15%): ${{ iva }}</h4>
+        <h4>Total con IVA: ${{ total_con_iva }}</h4>
+
+        <hr>
+
+        <h6>Selecciona tu forma de pago:</h6>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="forma_pago" id="tarjetaRadio" value="tarjeta">
+            <label class="form-check-label" for="tarjetaRadio">Tarjeta</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="forma_pago" id="efectivoRadio" value="efectivo">
+            <label class="form-check-label" for="efectivoRadio">Efectivo</label>
+        </div>
+
+        <hr>
+
+        <h6>Selecciona tu forma de entrega:</h6>
+        <input type="radio" id="domicilio" name="forma_entrega" value="domicilio" required>
+        <label for="domicilio">A domicilio</label>
+        <input type="radio" id="retirar" name="forma_entrega" value="retirar" required>
+        <label for="retirar">Retirar en la tienda</label>
+
+        <hr>
+
+        <button type="submit" class="btn btn-success mt-3" id="confirmarCompraBtn">Confirmar Compra</button>
+    </form>
+</div>
+{% endblock %}
